@@ -1,0 +1,34 @@
+<head>
+</head>
+<body>
+    <h1>Video Info</h1>
+    <form>
+        <div>
+            <label>Select a video</label>
+            <input type="file" accept="video/*" />
+        </div>
+        <button type="submit">Get Info</button>
+    </form>
+
+    <h1 id='result'></h1>
+
+    <script>
+        const electron = require('electron');
+        const { ipcRenderer } = electron;
+
+        document.querySelector('form').addEventListener('submit', (event) => {
+            //stop page from closing and sending form
+            event.preventDefault();
+            const { path } = document.querySelector('input').files[0];
+
+            // note - the string we use is completely up to us
+            // it doesn't mean anything except to be helpful
+            ipcRenderer.send('video:submit', path)
+        });
+
+        ipcRenderer.on('video:metadata', (even, duration) =>{
+            document.querySelector('#result').innerHTML = `Video is ${duration}`;
+        });
+
+    </script>
+</body>
