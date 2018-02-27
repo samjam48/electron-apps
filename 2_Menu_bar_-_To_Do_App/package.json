@@ -1,0 +1,14 @@
+{
+  "name": "2_menu_bar_-_to_do_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "electron": "electron ."
+  },
+  "author": "Sam Harris <s.w.h@live.co.uk> (https://samharris.eu)",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^1.8.2"
+  }
+}

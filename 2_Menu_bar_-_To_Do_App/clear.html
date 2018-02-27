@@ -1,0 +1,29 @@
+<head>
+
+</head>
+
+<body>
+    <h1>Clear Entire List</h1>
+
+    <label>Are you sure you want to clear the entire list?</label>
+    
+    <div>
+        <button onclick="clearList()">Yes</button>    
+        <button onclick="closeWindow()">Cancel</button>
+    </div>
+
+    <script>
+            const electron = require('electron');
+            const { ipcRenderer } = electron;
+    
+            function clearList() {
+                ipcRenderer.send('todos:clear');
+            };
+
+            function closeWindow() {
+                ipcRenderer.send('clearWindow:close');
+            };
+        </script>
+
+
+</body>

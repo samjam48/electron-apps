@@ -26,7 +26,7 @@
             ipcRenderer.send('video:submit', path)
         });
 
-        ipcRenderer.on('video:metadata', (even, duration) =>{
+        ipcRenderer.on('video:metadata', (event, duration) => {
             document.querySelector('#result').innerHTML = `Video is ${duration}`;
         });
 

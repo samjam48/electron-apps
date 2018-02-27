@@ -1,0 +1,30 @@
+<head>
+</head>
+
+<body>
+    <h1>All your lovely To Do's</h1>
+
+    <ul></ul>
+
+    <script>
+        const electron = require('electron');
+        const { ipcRenderer } = electron;
+        const list = document.querySelector('ul');
+
+        ipcRenderer.on('todo:add', (event, todo) => {
+            const li = document.createElement('li');
+            const text = document.createTextNode(todo);
+            li.appendChild(text);
+            list.appendChild(li);
+        });
+
+        ipcRenderer.on('todos:clear', (event) => {
+            const li = document.createElement('li');
+            li.id = 'complete'
+            const text = document.createTextNode('Chill out. All done');
+            li.appendChild(text);
+            list.innerHTML = '';
+            list.appendChild(li);
+        });
+    </script>
+</body>
