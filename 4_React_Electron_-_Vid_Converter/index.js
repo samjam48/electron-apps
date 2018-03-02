@@ -2,7 +2,7 @@ const electron = require('electron');
 const ffmpeg = require('fluent-ffmpeg');
 const _ = require('lodash');
 
-const { app, BrowserWindow, ipcMain } = electron;
+const { app, BrowserWindow, ipcMain, shell } = electron;
 
 let mainWindow;
 
@@ -38,19 +38,28 @@ ipcMain.on('videos:added', (event, videos) => {
 
 ipcMain.on('conversion:start', (event, videos) => {
     const keyNames = Object.keys(videos);
-    const video = videos[keyNames[0]]
 
-    console.log('===========================');
-    console.log(video);
+    _.each(keyNames, key => {
+        const video = videos[key]
+        const outputDirectory = video.path.split(video.name)[0];
+        const outputName = video.name.split('.')[0];
+        const outputPath = `${outputDirectory}${outputName}.${video.format}`;
+        console.log(video.path);
+        console.log(outputPath);
 
-    const outputDirectory = video.path.split(video.name)[0];
-    const outputName = video.name.split('.')[0];
-    const outputPath = `${outputDirectory}${outputName}.${video.format}`;
-    console.log(video.path);
-    console.log(outputPath);
+        ffmpeg(video.path)
+            .output(outputPath)
+            .on('progress', ({ timemark }) =>
+                mainWindow.webContents.send('conversion:progress', { video, timemark })
+            )
+            .on('end', () =>
+                mainWindow.webContents.send('conversion:end', { video, outputPath })
+            )
+            .run();
+    })
+});
 
-    ffmpeg(video.path)
-        .output(outputPath)
-        .on('end', () => console.log('Video conversion complete'))
-        .run();
+
+ipcMain.on('folder:open', (event, outputPath) => {
+    shell.showItemInFolder(outputPath);
 });
