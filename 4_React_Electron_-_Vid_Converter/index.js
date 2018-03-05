@@ -33,7 +33,6 @@ ipcMain.on('videos:added', (event, videos) => {
         .then((results) => {
             mainWindow.webContents.send('metadata:complete', results);
         });
-
 });
 
 ipcMain.on('conversion:start', (event, videos) => {

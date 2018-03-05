@@ -74,7 +74,7 @@ const menuTemplate = [
 
 // command to add empty object at start of MenuBar if on Mac OS
 if (process.platform === 'darwin') {
-    menuTemplate.unshift({}, {label: "blueberries", submenu: [ { label: 'Congrats you on Mac!'}, {label: 'New To Do'} ]});
+    menuTemplate.unshift({});
 }
 
 if (process.env.NODE_ENV !== 'production') {

@@ -16,3 +16,8 @@ ffmpeg library and fluent-ffmpeg for handling videos and getting in depth metada
 Sending data from the main window to the electron back end. Handling that information and then sending the result back to main window.
 
 ![diagram for sending IPC data between Electron and Main Window](./IPC_data_handling.png)
+
+
+#### Bonus work
+
+Convert seconds to hours and mins for nicer UX

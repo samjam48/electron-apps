@@ -12,6 +12,7 @@
         const list = document.querySelector('ul');
 
         ipcRenderer.on('todo:add', (event, todo) => {
+            if(document.getElementById("Complete")) list.innerHTML = '';
             const li = document.createElement('li');
             const text = document.createTextNode(todo);
             li.appendChild(text);
@@ -23,6 +24,7 @@
             li.id = 'complete'
             const text = document.createTextNode('Chill out. All done');
             li.appendChild(text);
+            li.setAttribute("id", "Complete")
             list.innerHTML = '';
             list.appendChild(li);
         });
