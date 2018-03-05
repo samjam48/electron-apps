@@ -87,7 +87,6 @@ ipcMain.on('conversion:start', (event, videos) => {
 ### Opening Folders from the app
 
 WE use the shell to access folders. WE send the file path from react to electron. In electron we use the shell.showItemInFolder commanf to open it.
-
 ```
 ipcMain.on('folder:open', (event, outputPath) => {
     shell.showItemInFolder(outputPath);
@@ -103,6 +102,7 @@ ipcMain.on('folder:open', (event, outputPath) => {
 
 ### Extra Tasks
 
+* Make a new page for converted files and remove them from the to convert page.
 * Change file / screen size To convert for ipad
 * Audio
     * handle audio file conversion
